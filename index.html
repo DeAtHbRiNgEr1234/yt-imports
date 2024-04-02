@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sudoku Solver</title>
+<style>
+    table {
+        border-collapse: collapse;
+        margin: 20px auto;
+    }
+    td {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        border: 1px solid #000;
+    }
+    input[type="text"] {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        border: none;
+        font-size: 16px;
+    }
+    input[type="button"] {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <table id="sudokuBoard"></table>
+    <input type="button" value="Solve Sudoku" onclick="solveSudoku()">
+    <script>
+        function createInputCell(row, col) {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.maxLength = "1";
+            input.id = "cell-" + row + "-" + col;
+            return input;
+        }
+
+        function createTable(board) {
+            const table = document.getElementById("sudokuBoard");
+            table.innerHTML = "";
+
+            for (let i = 0; i < 9; i++) {
+                const row = document.createElement("tr");
+                for (let j = 0; j < 9; j++) {
+                    const cell = document.createElement("td");
+                    const input = createInputCell(i, j);
+                    input.value = board[i][j] === 0 ? "" : board[i][j];
+                    cell.appendChild(input);
+                    row.appendChild(cell);
+                }
+                table.appendChild(row);
+            }
+        }
+
+        function solveSudoku() {
+            const board = [];
+            for (let i = 0; i < 9; i++) {
+                const row = [];
+                for (let j = 0; j < 9; j++) {
+                    const input = document.getElementById("cell-" + i + "-" + j);
+                    row.push(input.value === "" ? 0 : parseInt(input.value));
+                }
+                board.push(row);
+            }
+
+            // Send the board to backend for solving (not implemented here)
+
+            // Display the solved puzzle
+            const solvedBoard = solveSudokuBackend(board);
+            createTable(solvedBoard);
+        }
+
+        function solveSudokuBackend(board) {
+            // Backend code for solving the Sudoku puzzle (implemented separately)
+            // You can send the board to the backend using AJAX or fetch request
+            // Here, we just return the same board (placeholder)
+            return board;
+        }
+
+        // Initial puzzle
+        const initialBoard = [
+            [5, 3, 0, 0, 7, 0, 0, 0, 0],
+            [6, 0, 0, 1, 9, 5, 0, 0, 0],
+            [0, 9, 8, 0, 0, 0, 0, 6, 0],
+            [8, 0, 0, 0, 6, 0, 0, 0, 3],
+            [4, 0, 0, 8, 0, 3, 0, 0, 1],
+            [7, 0, 0, 0, 2, 0, 0, 0, 6],
+            [0, 6, 0, 0, 0, 0, 2, 8, 0],
+            [0, 0, 0, 4, 1, 9, 0, 0, 5],
+            [0, 0, 0, 0, 8, 0, 0, 7, 9]
+        ];
+
+        // Display the initial puzzle
+        createTable(initialBoard);
+    </script>
+</body>
+</html>
