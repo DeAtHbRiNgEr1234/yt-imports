@@ -2,7 +2,7 @@
 
 ## Description
 
-This Sudoku Solver is a program written in [insert language here] that solves Sudoku puzzles using a backtracking algorithm. It provides a simple command-line interface for inputting Sudoku puzzles and displays the solved puzzle.
+This Sudoku Solver is a program written in C that solves Sudoku puzzles using a backtracking algorithm. It provides a simple command-line interface for inputting Sudoku puzzles and displays the solved puzzle.
 
 ## Installation
 
